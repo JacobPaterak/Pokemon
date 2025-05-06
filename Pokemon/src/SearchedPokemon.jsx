@@ -1,4 +1,11 @@
-function SearchedPokemon() {
-  return <div></div>;
+function SearchedPokemon(props) {
+  return (
+    <div>
+      <h2></h2>
+      <h2></h2>
+      <h2></h2>
+      <h2></h2>
+    </div>
+  );
 }
 export default SearchedPokemon;
