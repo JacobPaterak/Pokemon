@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import SearchedPokemon from "./SearchedPokemon";
 import Types from "./Types";
+import Weakness_Card from "./Weakness_Card";
+import Strength_Card from "./Strength_Card";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -27,18 +29,13 @@ function App() {
     const Damage_Type = await type.json();
     const Pokemon_Weakness =
       Damage_Type.damage_relations.double_damage_from.map((t) => t.name);
-    // const Pokemon_Weakness = type.damage_relations.
-    // );
-    console.log(Pokemon_Weakness);
-    // const pokemon_type = await fetch(
-    //   "https://pokeapi.co/api/v2/type/" + Pokemon_type
-    // );
-    // const Pokemon_Weakness = data.damage_relations.double_damage_from.map(
-    //   (t) => t.name
-    // );
+    const Pokemon_Strength = Damage_Type.damage_relations.double_damage_to.map(
+      (t) => t.name
+    );
 
     setPokemonTypes(Pokemon_type);
-    console.log(Pokemon_type);
+    setWeakness(Pokemon_Weakness);
+    setStrength(Pokemon_Strength);
 
     setIsVisible(true); // Show components when clicked
   };
@@ -52,10 +49,12 @@ function App() {
         <button onClick={() => handleShowMatchups(inputValue)}>
           Show Matchups
         </button>
-
-        <p>{inputValue}</p>
-
-        {isVisible && <></>}
+        {isVisible && (
+          <>
+            <Weakness_Card type={WeakAgainst} />
+            <Strength_Card type={StrongAgainst} />
+          </>
+        )}
       </div>
     </>
   );
