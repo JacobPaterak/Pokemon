@@ -1,0 +1,24 @@
+div {
+  font-family: "Times New Roman", Times, serif;
+  background-color: ;
+}
+.Main h1 {
+  color: #ef5350;
+}
+.Cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.WeaknessCard {
+  text-align: left;
+  color: black;
+}
+.StrengthCard {
+  text-align: left;
+  color: #ef5350;
+}
+.Main {
+  text-align: center;
+}

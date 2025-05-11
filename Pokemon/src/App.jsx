@@ -4,6 +4,8 @@ import SearchedPokemon from "./SearchedPokemon";
 import Types from "./Types";
 import Weakness_Card from "./Weakness_Card";
 import Strength_Card from "./Strength_Card";
+import header from "./header.jsx";
+import No_Effect from "./No_Effect.jsx";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -11,6 +13,10 @@ function App() {
   const [pokemonTypes, setPokemonTypes] = useState([]);
   const [WeakAgainst, setWeakness] = useState([]);
   const [StrongAgainst, setStrength] = useState([]);
+  const [NoEffectFrom, setNoEffectFrom] = useState([]);
+  const [NoEffectTo, setNoEffectTo] = useState([]);
+  const [HalfDamageTo, setHalfDamageTo] = useState([]);
+  const [HalfDamageFrom, setHalfDamageFrom] = useState([]);
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -32,17 +38,30 @@ function App() {
     const Pokemon_Strength = Damage_Type.damage_relations.double_damage_to.map(
       (t) => t.name
     );
-
+    const Pokemon_No_Effect_from =
+      Damage_Type.damage_relations.no_damage_from.map((t) => t.name);
+    const Pokemon_No_Effect_to = Damage_Type.damage_relations.no_damage_to.map(
+      (t) => t.name
+    );
+    const Pokemon_Half_Damage_to =
+      Damage_Type.damage_relations.half_damage_to.map((t) => t.name);
+    const Pokemon_Half_Damage_from =
+      Damage_Type.damage_relations.half_damage_from.map((t) => t.name);
     setPokemonTypes(Pokemon_type);
     setWeakness(Pokemon_Weakness);
     setStrength(Pokemon_Strength);
+    setHalfDamageFrom(Pokemon_Half_Damage_from);
+    setHalfDamageTo(Pokemon_Half_Damage_to);
+    setNoEffectTo(Pokemon_No_Effect_to);
+    setNoEffectFrom(Pokemon_No_Effect_from);
 
     setIsVisible(true); // Show components when clicked
   };
   //(inputValue)
   return (
     <>
-      <div>
+      <div className="Main">
+        <header />
         <h1>Search Pokémon</h1>
         <label>Input Pokémon Name:</label>
         <input type="text" value={inputValue} onChange={handleInputChange} />
@@ -50,10 +69,19 @@ function App() {
           Show Matchups
         </button>
         {isVisible && (
-          <>
-            <Weakness_Card type={WeakAgainst} />
-            <Strength_Card type={StrongAgainst} />
-          </>
+          <div className="Cards">
+            <Strength_Card
+              double={StrongAgainst}
+              half={HalfDamageTo}
+              noEffect={NoEffectTo}
+            />
+
+            <Weakness_Card
+              double={WeakAgainst}
+              half={HalfDamageFrom}
+              noEffect={NoEffectFrom}
+            />
+          </div>
         )}
       </div>
     </>
